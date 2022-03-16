@@ -1,35 +1,66 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <link rel="stylesheet" href="canvas.css" />
+    <link rel="stylesheet" href="canvas.css"/>
     <title>Document</title>
-  </head>
-  <body>
-    <div id="canvas"></div>
-    <script>
-      canvas.onclick = (e) => {
-        console.log("点击了");
-        console.log(e.clientX);
-        console.log(e.clientY);
-        var dot = document.createElement("div");
-        dot.style.position="absolute";
-        dot.style.left = e.clientX + "px";
-        dot.style.top = e.clientY + "px";
-        dot.style.width = "6px";
-        dot.style.height = "6px";
-        dot.style.border = "1px solid red";
-        dot.style.marginTop = '-3px';
-        dot.style.marginLeft = '-3px';
-        dot.style.background = "red";
-        dot.style.borderRadius = "50%";
-        canvas.appendChild(dot);
-      };
-    </script>
-  </body>
+</head>
+<body>
+<!--    <div id="canvas"></div>-->
+<!--    <script>-->
+<!--      canvas.onmousemove = (e) => {-->
+<!--        console.log("点击了");-->
+<!--        console.log(e.clientX);-->
+<!--        console.log(e.clientY);-->
+<!--        let dot = document.createElement("div");-->
+<!--        dot.style.position="absolute";-->
+<!--        dot.style.left = e.clientX + "px";-->
+<!--        dot.style.top = e.clientY + "px";-->
+<!--        dot.style.width = "6px";-->
+<!--        dot.style.height = "6px";-->
+<!--        dot.style.border = "1px solid red";-->
+<!--        dot.style.marginTop = '-3px';-->
+<!--        dot.style.marginLeft = '-3px';-->
+<!--        dot.style.background = "red";-->
+<!--        dot.style.borderRadius = "50%";-->
+<!--        canvas.appendChild(dot);-->
+<!--      };-->
+<!--    </script>-->
+
+<canvas id="canvas"></canvas>
+<script>
+    let canvas = document.getElementById("canvas");
+    canvas.width = document.documentElement.clientWidth;
+    canvas.height = document.documentElement.clientHeight;
+    let ctx = canvas.getContext("2d");
+    ctx.fillStyle = "blue";
+    let painting = false;
+    canvas.onmousedown = (e) => {
+        painting = true;
+    }
+    canvas.onmouseup = (e) => {
+        painting = false;
+    }
+    canvas.onmousemove = (e) => {
+        // if (painting === true) {
+        //     ctx.fillRect(e.clientX - 5, e.clientY - 5, 10, 10);
+        //     return;
+        // }
+        if(painting){
+            ctx.beginPath();
+            ctx.arc(e.clientX,e.clientY,10,0,2*Math.PI)
+            ctx.stroke();
+            ctx.fill();
+        }
+
+    }
+    // ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+    // ctx.fillRect (30, 30, 55, 50);
+</script>
+</body>
 </html>
